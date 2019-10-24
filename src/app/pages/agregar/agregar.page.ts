@@ -18,10 +18,8 @@ export class AgregarPage implements OnInit {
               private deseosServices: DeseosService,
               private router: ActivatedRoute ){
 
-    const listaId  =this.router.snapshot.paramMap.get( 'id' );
-
+    const listaId = this.router.snapshot.paramMap.get( 'id' );
     this.lista = this.deseosServices.obtenerLista( listaId );
-    
   }
 
   ngOnInit() {
@@ -46,8 +44,6 @@ export class AgregarPage implements OnInit {
     }
     
     this.deseosServices.guardarStorage();
-
-    console.log({ numPendientes });
   }
 
   agregarItem(){

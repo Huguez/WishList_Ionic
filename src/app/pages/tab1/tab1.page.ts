@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DeseosService } from '../../services/deseos.service';
-import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DeseosService } from 'src/app/services/deseos.service';
 import { List } from 'src/app/models/List.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -11,10 +11,10 @@ import { List } from 'src/app/models/List.model';
 })
 
 export class Tab1Page {
+  
+  //@ViewChild( ListasComponent ) terminada: boolean;
 
-  constructor(
-    public DeseosServices: DeseosService,
-    private router: Router, private alert: AlertController ){}
+  constructor(  private router: Router, public deseosServices: DeseosService,  private alert: AlertController ){}
 
   async agregarLista(){
     const alert = await this.alert.create({
@@ -40,8 +40,8 @@ export class Tab1Page {
             if( data.titulo.length === 0 ){
               return;
             }
-            const id = this.DeseosServices.crearLista( data.titulo );
-            this.router.navigateByUrl( `/tabs/tab1/agregar/${ id }` );            
+            const id = this.deseosServices.crearLista( data.titulo );
+            this.router.navigateByUrl( `${ this.router.url }/agregar/${ id }` );            
           }
         }
       ]
@@ -49,8 +49,8 @@ export class Tab1Page {
     await alert.present(); 
   }
 
-  
   listaSeleccionada( lista: List ){
     this.router.navigateByUrl( `/tabs/tab1/agregar/${ lista.id }` );   
   }
+
 }
